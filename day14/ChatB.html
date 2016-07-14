@@ -4,11 +4,27 @@
 <meta charset="UTF-8">
 <title>ChatB</title>
 <link rel="stylesheet" type="text/css" href="/css/chat.css" />
+<script>
+var area;
+
+function init(){
+	area=document.getElementById("area")';
+}
+function enter(obj){
+		var key=event.keyCode;
+
+	if(key==13){
+	opener.chatA.area.value+=obj.value+"\n";
+	area.value+=obj.value+"\n";
+	obj.value="";
+	}
+}
+</script>
 </head>
-<body>
+<body onLoad="init()">
 <div id="wrapper">
-	<textarea></textarea>
-	<input type="text">
+	<textarea id="area"></textarea>
+	<input type="text" onkeyUp="enter(this)">
 </div>
 </body>
 </html>
