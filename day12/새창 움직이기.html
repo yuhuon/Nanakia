@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>새창 움직이기</title>
+<script>
+var x=0;
+var y=0;
+var myWin;
+	function openWin(){
+		myWin=window.open("Zipcode.html","pop",'width=200,height=200');		
+		move();
+	}
+	function move(){
+		x+=2
+
+		myWin.moveTo(x,y);
+		myWin.resizeBy(20,20)
+		setTimeout("move()",100);
+	}
+</script>
+</head>
+<body>
+	<a href="javascript:openWin()">새창 띄우기</a>
+</body>
+</html>

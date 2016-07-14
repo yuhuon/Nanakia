@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script>
+var x=1;
+//문서내의 pic이라는 이미지의 src를 바꾸자!!
+function next(){
+	x++;
+	
+	console.log(x);
+	//x가 19이상이 되면 다시 1로 전환!!
+	
+	//x=(x >=19)?  1 : x ;
+	if(x>=19){
+		x=1;
+	}
+
+	document.getElementById("pic").src="../images/warior/image"+x+".png";
+
+	//컴퓨터 스스로 이 함수를 호출하게 하자!!
+	// 1/1000 초까지 표현 가능하다	
+
+	setTimeout("next()", 10);
+}
+
+</script>
+</head>
+<body>
+	<input type="button" value="헐떡이기" onClick="next()">
+	<br>
+	<img src="../images/warior/image1.png" id="pic">
+</body>
+</html>

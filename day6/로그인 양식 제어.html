@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>로그인 양식 제어</title>
+<script>
+//ID와 PW입력을 제대로 유효하게 작성한 사람에 대해서만
+
+function loginCheck(){
+//서버에 정보를 보내기 전에 이 유저가 제대로 입력했는지 여부를
+//체크해보자 = 유효성 체크!!
+	if(document.getElementById("member_id").value==""){
+		alert("ID 입력해!!");
+		document.getElementById("member_id").focus();
+		return;//실행부로 하여금 호출부로 되돌아가게 만듬!!
+	}else if(!document.getElementById("member_pwd").value){
+		// 자바 스크립트에서는 value 값이 없을때 앞에 부정을 쓰는것도 인정 함!!
+		alert("PW 입력해!!");
+		document.getElementById("member_pwd").focus();
+		return;		
+	}
+	location.href="http://daum.net";
+}
+</script>
+</head>
+<body>
+	<table width="300px" border="1px" align="center">
+		<tr>
+			<td>ID</td>
+			<td>
+				<input type="text" maxlength="8" id="member_id">
+			</td>	
+		</tr>	
+		<tr>
+			<td>PW</td>
+			<td>
+				<input type="password" maxlength="8" id="member_pwd">
+			</td>	
+		</tr>	
+		<tr>
+			<td colspan="2" align="center" >
+				<input type="button" value="회원가입">
+				<input type="button" value="ID/PW찾기">
+				<input type="button" value="로그인" onClick="loginCheck()">
+			</td>			
+		</tr>	
+	</table>
+</body>
+</html>

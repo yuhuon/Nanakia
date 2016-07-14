@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>슈렉 겔러리</title>
+<style>
+body{
+	margin:0px;
+}
+#wrapper{
+	width:500px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:200px;	
+	text-align:center;
+	font-size:15pt;
+}
+#mask{
+	width:500px;
+	height:340px;
+	overflow:hidden;
+}
+
+#box{
+	height:340px;
+}
+
+a{
+	text-decoration:none; /*밑줄 없애기*/
+	color:#000000;
+}
+
+/*a 태그에 마우스 올려놓으면...*/
+a:hover{
+	color:#ff9900;
+}
+</style>
+<script>
+var arr = [
+	"../images/shurek/img0.jpg",
+	"../images/shurek/img1.jpg",
+	"../images/shurek/img2.jpg",
+	"../images/shurek/img3.jpg",
+	"../images/shurek/img4.jpg",
+	"../images/shurek/img5.jpg",
+	"../images/shurek/img6.jpg",
+];
+
+var box;
+var targetX=0; //box가 도달할 목표지점!!
+var a=0.9; //부드러운 정도를 나타냄..(수학에서의 비율계수)
+
+function init(){
+	box=document.getElementById("box");
+	box.style.width=500*arr.length+"px";
+
+	//이미지 생성!!
+	for(var i=0;i<arr.length;i++){
+		var img=document.createElement("img");
+		img.src=arr[i];
+		box.appendChild(img);
+	}
+	
+	//심장박동 시작하기!!
+	move();
+}
+
+function showImg(pos){
+	targetX = -pos*500;
+}
+
+function move(){
+	//box.style.left= 타겟x -(pos*500)+"px";
+	//나의 이미지위치 = (타겟- a*(타겟-나의 이미지위치));
+	box.style.left=targetX- a*(targetX- parseFloat(box.style.left))+"px";
+	console.log(box.style.left);
+	setTimeout("move()", 10);
+}
+
+</script>
+</head>
+<body onLoad="init()">
+	<div id="wrapper">
+		<div id="mask">
+			<div id="box" style="position:relative;left:0px;top:0px"></div>
+		</div>
+		<a href="javascript:showImg(0)">●</a>
+		<a href="javascript:showImg(1)">●</a>
+		<a href="javascript:showImg(2)">●</a>
+		<a href="javascript:showImg(3)">●</a>
+		<a href="javascript:showImg(4)">●</a>
+		<a href="javascript:showImg(5)">●</a>
+		<a href="javascript:showImg(6)">●</a>
+	</div>
+</body>
+</html>

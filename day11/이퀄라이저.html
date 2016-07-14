@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>이퀄라이저</title>
+<style>
+body{
+	margin:0px;
+}
+#stage{
+	width:700px;
+	height:500px;
+}
+</style>
+<script src="../lib/lib.js"></script>
+<script>
+var bgArray=["red","orange","yellow","green","blue","purple"]
+var rectArray=new Array();//사각형을 담아두기 위한 배열
+									//그래야 다른 함수에서 사용 할 수 있기 때문
+
+var Rect = function(stage,bg,width,height,x,y){
+	this.stage=stage;
+	this.div;
+	this.bg=bg;
+	this.width=width;
+	this.height=height;
+	this.x=x;
+	this.y=y;
+	this.targetY=0;//사각형이 늘어날  y 축 좌표값
+	this.a=0.9;//배율계수는 소주점으로..
+	
+
+	this.init=function(){
+		var me=this;
+		this.div=document.createElement("div");
+		this.div.style.background=this.bg;
+		this.div.style.width=this.width+"px";
+		this.div.style.height=this.height+"px";
+
+		this.div.style.position="absolute";
+		this.div.style.left=this.x+"px";
+		this.div.style.top=this.y+"px";
+
+		this.stage.appendChild(this.div);
+
+		this.div.addEventListener("mouseover",function(){
+			//alert(me.bg+"올렸어?");
+			me.targetY=500;
+		});
+
+		//마우스 내려 놓으면.. 
+		this.div.addEventListener("mouseout",function(){
+			me.targetY=0;
+			me.div.style.height=40+"px";//원상 복귀!!
+		})
+
+		this.move();
+	}
+	
+	this.move=function(){
+		var me=this;
+	
+		//지정된 targetY만큼 height를 늘리자!!
+		//내위치= 목적지-비율계수*(목적지-내위치)
+		var y=parseInt(this.div.style.height)+5;
+		
+		this.div.style.height=this.targetY-this.a*(this.targetY-y)+"px";
+
+		setTimeout(function(){
+			me.move();
+		},10);
+	}
+}
+
+window.addEventListener("load",function(){
+	init();
+});
+
+//문서가 로드되면,원하는 갯수의 사각형을 가로 방향으로 나열!!
+function init(){
+	for(i=0;i<bgArray.length;i++){
+		var rect=new Rect(stage,bgArray[i],100,40,i*100,0);
+		rect.init();
+		rectArray[i]=rect;
+	}
+	dance();
+}
+
+//일정한 주기 간격으로 사용자가 마우스를 올려놓지 않더라도.
+//각 사각형이 보유한 targetY값을 랜덤하게 부여하자!!
+function dance(){
+	for(var i=0;i<rectArray.length;i++){
+		rectArray[i].targetY=getRandomByRange(500,40);//40~500사이 랜덤하게 부여 하기
+	}
+	setTimeout("dance()",220);
+
+}
+
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>화살 날리기</title>
+<style>
+body{margin:0px;}
+
+#wrapper{
+	width:100%;
+	height:900px;
+	background:yellow;
+}
+</style>
+<script>
+/*문서가 로드되면,  span을 생성하여, 그 사이에 특수문자 화살표
+넣고, 날리세요!!*/
+var wrapper;
+var span;
+var x=100;
+
+function init(){
+	wrapper=document.getElementById("wrapper");
+	
+	span=document.createElement("span");
+	span.innerText="→";
+	span.style.fontSize="50pt";
+	span.style.color="red";
+	span.style.position="relative";
+	span.style.left=100+"px";
+	span.style.top=200+"px";
+
+	span1=document.createElement("span");
+	span1.innerText="→";
+	span1.style.fontSize="50pt";
+	span1.style.color="blue";
+	span1.style.position="relative";
+	span1.style.left=100+"px";
+	span1.style.top=200+"px";
+	
+	//div에 부착!!
+	wrapper.appendChild(span);
+	wrapper.appendChild(span1);
+	move();
+}
+
+//원하는 시간 간격으로 setTimeout 호출하여, 움직이기!!
+function move(){
+	x+=10;
+	span.style.left=x+"px";
+	span1.style.left=2*x+"px";
+	setTimeout("move()", 50);	
+}
+</script>
+</head>
+<body onLoad="init()">
+<div id="wrapper"></div>
+</body>
+</html>
+

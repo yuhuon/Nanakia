@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>프로그램으로 테이블 출력</title>
+
+<script>
+
+var f=prompt("층수를 입력하세요");
+var h=prompt("호수를 입력하세요");
+var b=prompt("건물 두께를 입력하세요");
+var wid=prompt("건물의 가로폭을 입력하세요");
+
+document.write("<table width=\""+wid+"px\"><table border=\""+b+"px\">");
+for(var y=1;y<=f;y++){
+	document.write("<tr>");
+	//document.write("<td width=\"100px\">&nbsp</td>"); //&nbsp 공백문자를 의미
+	for(var x=1;x<=h;x++){
+	document.write("<td width="+50+"px\">"+(y+"0"+x)+"호</td>");
+	}
+	document.write("</tr>");
+}
+document.write("</table>");
+</script>
+
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>미로 게임</title>
+<style>
+body{
+	margin:0px;
+}
+#stage{
+	background:#ffcc00;	
+	
+}
+</style>
+<script src="../lib/lib.js"></script>
+<script src="../lib/Hero.js"></script>
+<script src="../lib/Maze.js"></script>
+<script>
+var stage;
+var maze;
+var w=20;//미로의 가로 크기
+var hero;
+
+window.addEventListener("load",function(){
+	init();
+})
+
+function init(){
+	stage=document.getElementById("stage")
+	stage.style.width=screen.width+"px";
+	stage.style.height=800+"px";
+	stage.style.backgroundImage-"url(../images/1/background.pnd)"
+
+	//미로 생성
+	var countY=0;// 개행을 결정 하는 변수
+	var countX=0;//x를 초기 위치로 둘수 있는 변수
+	for(i=0; i<2000; i++){
+		if(i%50==0){
+			countY++;
+			countX=0;//줄바꿈이 일어나면 다시 x좌표를 0으로 돌려 놓음.
+		}
+		maze=new Maze(stage, w, w, countX*w, countY*w);
+		maze.init();
+		countX++;
+	}
+
+	//주인공 등장!!
+
+	hero = new Hero(stage,w,w,100,50,"../images/mario.png")
+	hero.init();
+
+}
+
+window.addEventListener("keydown",function(){
+	var key=event.keyCode;
+
+	switch(key){
+		case 37: hero.velX=-1;break;
+		case 38: hero.velY=-1;break;
+		case 39: hero.velX=1;break;
+		case 40: hero.velY=1;break;
+	}
+	
+});
+window.addEventListener("keyup",function(){
+	var key=event.keyCode;
+
+	if(key==37 || key==39){
+		hero.velX=0;
+	}
+	if(key==38 || key==40){
+		hero.velY=0;
+	}
+});
+
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

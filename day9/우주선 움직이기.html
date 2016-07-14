@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>우주선 움직이기</title>
+<style>
+#stage{
+	height:800px;
+}
+</style>
+<script src="../lib/Bullet.js"></script>
+<script>
+var stage;
+var s;
+
+//load 이벤트 처리...
+window.addEventListener("load", function(){
+	stage=document.getElementById("stage");
+	stage.style.width=1000+"px";
+
+	//우주선 등장!!
+	s = new Ship(100,80,100,200,stage);
+	s.init();
+
+	//불꽃화염 나오게..
+
+});
+
+//마우스 이벤트 처리...
+window.addEventListener("keydown", function(){
+	if(event.keyCode==32){ //space bar 누르면...
+		//alert("총알 날리까?");
+		var b = new Bullet(stage, s.x ,s.y);
+		b.init();
+	}else if(event.keyCode==37){ //좌측으로..
+		s.x-=10;
+		s.go();
+	}else if(event.keyCode==38){//위쪽으로..
+		s.y-=10;
+		s.go();
+	}else if(event.keyCode==39){//우측으로
+		//우주선의 x 좌표값을 증가..
+		s.x+=10;
+		s.go();
+	}else if(event.keyCode==40){//아래로..
+		s.y+=10;
+		s.go();
+	}
+});
+
+var Ship = function(width,height,x,y,area){
+	this.width=width;
+	this.height=height;
+	this.x=x;
+	this.y=y;
+	this.img;
+	this.area=area;
+
+	this.init=function(){
+		this.img=document.createElement("img");
+		this.img.src="../images/ship.png";
+		this.img.style.width=this.width+"px";
+		this.img.style.height=this.height+"px";
+		this.img.style.position="absolute";
+		this.img.style.left=this.x+"px";
+		this.img.style.top=this.y+"px";
+
+		this.area.appendChild(this.img);
+	}
+	
+	//방향이동!!
+	this.go=function(){
+		this.img.style.left=this.x+"px";			
+		this.img.style.top=this.y+"px";
+	}
+
+	this.move=function(){
+
+	}
+}
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

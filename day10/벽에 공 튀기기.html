@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>벽에 공 튀기기</title>
+<style>
+body{
+	margin:0px;
+}
+#stage{
+	width:800px;
+	height:800px;
+	border: 1px solid red;
+
+}
+</style>
+<script>
+var stage;
+var ballImg=[
+	"../images/ball1.png",
+	"../images/ball2.png",
+	"../images/ball3.png",
+	"../images/ball4.png",
+	"../images/ball5.png",
+];
+
+//볼을 정의한다!!
+var Ball = function(stage,width,height,x,y,src,rotate){
+	/*클래스가 보유한 변수를 멤버변수라 한다.*/
+	this.stage=stage;
+	this.img;
+	this.width=width;
+	this.height=height;
+	this.x=x;
+	this.y=y;
+	this.src=src;
+	this.rotate=rotate;//시작할 각도.
+	
+	this.init=function(){
+		this.img=document.createElement("img");
+		this.img.src=this.src;
+		this.img.style.width=this.width+"px";
+		this.img.style.height=this.height+"px";
+		this.img.style.position="absolute";
+		this.img.style.left=this.x+"px";
+		this.img.style.top=this.y+"px";
+
+		this.stage.appendChild(this.img);
+		this.move();
+	}
+	
+	this.move=function(){
+		var me=this;
+
+		//회전시키기
+		this.rotate+=2;
+		this.img.style.transform="rotate("+this.rotate+"deg)";
+		setTimeout(function(){
+			me.move();
+		},10);
+	}
+}
+
+//문서가 로드되면...
+
+window.addEventListener("load",function(){
+	stage=document.getElementById("stage");
+});
+
+//스페이스바를 누르면....
+window.addEventListener("keydown",function(){
+	//볼을 탄생시키자!!
+	if(event.keyCode==32){
+		//랜덤 값 구하기!!
+		var r=parseInt(Math.random()*ballImg.length);
+		var b=new Ball(stage,100,100,200,300,ballImg[r],0)
+		b.init();
+	
+	}
+});
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

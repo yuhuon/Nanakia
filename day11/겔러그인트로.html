@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>겔러그 인트로</title>
+<style>
+body{margin:0px;}
+
+#stage{
+	width:600px;
+	height:600px;
+	background-Image:url("../images/gallerxy/intro.jpg");
+	font-size:40pt;
+	color:yellow;
+	text-align:center;
+}
+</style>
+<script>
+var stage;
+var flag=false;
+window.addEventListener("load", function(){
+	stage=document.getElementById("stage");
+	
+	stage.addEventListener("click", function(){
+		//자바스크립트를 이용한 링크!!
+		location.href="겔러그.html";
+	});
+
+	blink();	
+});
+
+function blink(){
+	if(flag=!flag){
+		stage.innerText="INSERT COIN";
+	}else{
+		stage.innerText="";
+	}
+	setTimeout("blink()",500);
+}
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

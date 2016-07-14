@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>라이트 효과</title>
+<script>
+var bg = new Array();
+bg[0]="orange";
+bg[1]="yellow";
+bg[2]="green";
+bg[3]="blue";
+bg[4]="purple";
+bg[5]="red";
+
+
+
+//후보색 7개를 배열로 선언하고,랜덤하게 bg를 결정하되 원하는 시간 간격으로 자동으로 전환 되도록 하시오!!!
+function setBg(){
+	var r=parseInt(Math.random()*bg.length);
+	document.body.style.background=bg[r];
+	setTimeout("setBg()",300);
+}
+
+</script>
+
+</head>
+<body>
+<input type="button" value="시작" onClick="setBg()">
+</body>
+</html>

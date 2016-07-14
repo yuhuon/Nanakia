@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+//한줄 주석 
+/*
+여러줄 주석 
+이 영역은 프로그래밍 작성 영역이므로,  html과는 차원이 틀리다.
+따라서 대소문자나 정확하지 않은 문법은 모두 에러로 간주..
+*/
+
+//개발자가 next 함수를 정의함!!
+/*
+특정 영역을 브레이스로 감싸고, 그 감싼 영역에 이름을 붙인
+단위를 함수라 하며, 함수는 호출해야 작동한다!!
+*/
+function next(){
+	//alert("나 불렀어?");	
+	//문서내의 이미지를 다른것으로 바꾼다!!
+
+	//문서내의 포토라는 요소를
+	document.getElementById("photo").src="../images/2.jpg"; 
+}
+</script>
+</head>
+<body>
+
+<img id="photo" src="../images/1.jpg" width="400px">
+
+<input type="button" value="버튼" onClick="next()">
+
+</body>
+</html>

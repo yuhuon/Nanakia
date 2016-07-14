@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>회원가입 양식 유효성 체크</title>
+
+<link rel="stylesheet" type="text/css" href="/css/mystyle.css" />
+
+
+<script>
+var mailArr=["naver.com","daum.net","google.com","nate.com","직접 입력"];
+var d=new Date();
+
+	window.addEventListener("load",function(){
+		init();
+	})
+	function init(){
+		form1.mid.focus();
+		getBirth();
+		getMail();
+		getBirth1();
+		//jumin2에 대한 이벤트 적용
+		form1.jumin2.addEventListener("keyup",function(){
+			//alert("키뗐어?");
+			
+			checkGender();
+		})		
+	}
+
+	function regist(){
+			//유효성 체크!!
+		if(form1.mid.value==""){
+			alert("Id를 입력하세요");
+			form1.mid.focus();
+			return;//패스 워드에 대한 유효성 체크
+		}else if(form1.pwd.value==""){
+			alert("password를 입력하세요.");
+			form1.pwd.focus();
+			return;
+		}else if(form1.pwd.value !=form1.pwd2.value){//2개의 패스워드가 서로  같은지 유효성 체크
+			alert("password를 확인 하세요.");
+			form1.pwd2.value="";
+			form1.pwd2.focus();
+			return;
+		}else if(form1.mname.value.length<1){//String 객체의 length 속성
+			//String 객체는 new 연산 자등을 사용하지 않더라도,문자열이 메모리에
+			//올라오기만 하면 그 자체의 데이터가 곧 String 객체이다.
+			alert("이름을 입력하세요");
+			form1.mname.focus();
+			return;
+		}
+		
+	
+		form1.action="http://daum.net";//전송 url 가재!!
+		//form1.submit();
+	}
+	function getBirth1(){		// 
+		form1.yy.value = d.getFullYear() ;
+		form1.mm.value = d.getMonth()+1;
+		form1.dd.value = d.getDate();
+
+	}
+	//생년월일 초기화
+	function getBirth(){
+		for(var i=2020;i>=1930;i--){
+			//년도 채우기
+			var op=document.createElement("option");
+			op.text=i;
+
+			//serlect에 추가 하기
+			form1.yy.add(op);	
+			
+		}
+			
+		for(var m=1;m<=12;m++){
+			//월 채우기
+			var op=document.createElement("option");
+			op.text=m;
+
+			//serlect에 추가 하기
+			form1.mm.add(op);
+		}
+	
+		for(var d=1;d<=31;d++){
+			//월 채우기
+			var op=document.createElement("option");
+			op.text=d;
+
+			//serlect에 추가 하기
+			form1.dd.add(op);
+		}
+		
+	}
+
+	function getMail(){
+		for(var i=0;i<mailArr.length;i++){
+			var op=document.createElement("option")
+			op.text=mailArr[i];
+			form1.mail_server.add(op);
+		}
+		if(mailArr[1]){
+		
+		}
+	}
+
+	function checkGender(){
+		//문자열의 제일 앞자리가 1,2인지 알아보자!!
+			//1이면 남자 radio 박스 true,2이면 여자 radio 박스 true;
+		var g=form1.jumin2.value.charAt(0);
+		if(g=="1"){
+			//alert("남자 이군요")
+			form1.gender[0].checked=true;
+		}else if(g=="2"){
+			//alert("여자 군요");
+			form1.gender[1].checked=true;
+		}
+	}
+
+	//우편번호 검색을 위한 새창 띄우는 함수
+	function findZip(){
+		//새창을 띄운다!!(window 객체의 api 활용)
+		window.open("Zipcode.html", "pop" , "width=400px","height=500px","left=500px","top=100px");
+	}
+</script>
+</head>
+<body>
+
+	<form name="form1">
+		<table width="600px" border="1px" align="center">
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="mid"></td>
+			</tr>
+			<tr>
+				<td>패스워드</td>
+				<td><input type="password" name="pwd"></td>
+			</tr>
+			<tr>
+				<td>패스워드 확인</td>
+				<td><input type="password" name="pwd2"></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="mname"></td>
+			</tr>
+			<tr>
+				<td>주민번호</td>
+				<td><input type="text" name="jumin1" maxlength="6">-<input type="text" name="jumin2" maxlength="8"></td>
+			</tr>
+			<tr>
+				<td>성별</td>
+				<td>
+				<input type="radio" name="gender">남
+				<input type="radio" name="gender">여
+			</tr>
+			<tr>
+				<td>생년 월일</td>
+				<td>
+					<select name="yy"></select>년
+					<select name="mm"></select>월
+					<select name="dd"></select>일
+				</td>
+			</tr>
+			<tr>
+				<td>우편번호</td>
+				<td>
+					<input type="text" name="zipcode1" readonly>-<input type="text" name="zipcode2" readonly>
+					<input type="button" value="우편번호 검색" onClick="findZip()">
+				</td>
+			</tr>
+			<tr>
+			<td>주소</td>
+				<td>
+					<input type="text" name="addr1" ><br>
+					<input type="text" name="addr2"></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td>
+					<input type="text" name="mail_id">@<select name="mail_server"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>연락처</td>
+				<td>
+					<select name="tel1"></select>
+					-<input type="text" name="tel2">
+					-<input type="text" name="tel3">
+				</td>
+			</tr>
+			<tr>
+				<td>취미</td>
+				<td>
+					*반드시 2개 이상은 선택 하셔야 합니다.<br>
+					여행<input type="checkbox">
+					게임<input type="checkbox">
+					영화<input type="checkbox">
+					스포츠<input type="checkbox">
+					요리<input type="checkbox">
+				</td>
+			</tr>
+			<tr>
+				<td>남길 메세지</td>
+				<td>
+					<textarea name="msg" rows="5" cols="50"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="회원가입" onClick="regist()">
+					<input type="button" value="다시작성">
+				</td>		
+			</tr>
+
+		</table>
+	</form>
+
+</body>
+
+</html>

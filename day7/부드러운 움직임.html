@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>부드러운 움직임</title>
+<style>
+#mario{
+	position:absolute;
+	left:0px;
+	top:200px;
+}
+#mscrin{
+	background:yellow;
+	left:100%;
+	height:900px;
+}
+</style>
+
+<script>
+var mario;
+var targetX=700;// 마리오가 도달할 목표 지점!!
+var targetY=0;
+var a=0.9;
+function init(){
+	mario=document.getElementById("mario");
+}
+function move1(){
+	//alert(parseInt(mario.style.left));
+	
+	mario.style.left=targetX - a*(targetX-parseInt(mario.style.left))+"px";
+	mario.style.top=targetY - a*(targetY-parseInt(mario.style.top))+"px";
+	console.log(targetX)
+	//목표지점 - 비율계수*(목표지점과 - 나의 위치);
+	setTimeout("move1()",50);
+}
+
+function setpos(){
+	targetX=event.clientX;
+	targetY=event.clientY;
+	move1();
+}
+</script>
+
+</head>
+<body onLoad="init()">
+<div id="mscrin" onMouseMove="setpos()">
+<img src="../images/mario.png" width="100px" id="mario" style="position:absolute;left:0px;top:200px;">
+</div>
+</body>
+</html>

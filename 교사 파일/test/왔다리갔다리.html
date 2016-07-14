@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+#star{
+	position:absolute;
+	left:0px;
+	top:200px;
+}
+</style>
+<script>
+var x=0;
+var forward=true;
+
+function move(){
+	var star=document.getElementById("star");
+	
+	if(forward){
+		x+=10;
+	}else{
+		x-=10;		
+	}
+
+	if(x==300 || x==0){
+		forward=!forward;
+	}
+	console.log(x);
+	star.style.left=x+"px";
+}
+</script>
+</head>
+<body>
+<input type="button" value="움직이기" onClick="move()">
+<span id="star">★</span>
+</body>
+</html>

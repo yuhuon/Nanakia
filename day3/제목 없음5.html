@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+#pic{
+	width:250px;
+	height:300px;
+}	
+</style>
+<script>
+var x=1
+function movePic(){
+	x++;
+	x=(x>=19)?1:x;
+	document.getElementById("pic").src="../images/warior/image"+x+".png";
+}
+</script>
+</head>
+<body>
+	<input type="button" value="펄럭임" onClick="movePic()">
+	<img src ="../images/warior/image1.png" id="pic">
+
+
+</body>
+</html>

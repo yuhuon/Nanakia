@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>스탑워치</title>
+<style>
+#txt{
+	width:200px;
+	height:100px;
+	font-size:40pt;
+	font-weight:bold;
+	color:red;
+	background:yellow;
+	text-align:right;/*내용물에 대한 우측 정렬*/
+	
+}
+</style>
+<script>
+var st;
+var ss=0;//초를 담는 전역 변수!!
+//문서가 모두 읽혀졌으므로, 아래의 txt 요소를 접근할 수 있는 시점
+function init(){
+	document.getElementById("txt").value=0;
+}
+//txt의 기존 값을 증가값으로 대입
+function start(){
+
+	document.getElementById("txt").value=ss;
+	st=setTimeout("start()",100);
+	ss=(ss>59)?00:ss;
+	ss++
+	//버튼을 못누르게 비활성화 시키기
+	//document.getElementById("bt_start").disabled=true;
+}
+function stop(){
+	clearTimeout(st); //기존 셋타임 아웃에 의한 자동호출을 중지!!!
+	document.getElementById("bt_start").disabled=false;//비활성하 할래?? 아니오-->>> 활성화
+}
+</script>
+
+</head>
+<body onLoad="init()">
+<input type="text" id="txt" >
+<input type="button" value="시작" onClick="start()" id="bt_start">
+<input type="button" value="정지" onClick="stop()" id="bt_stop">
+
+</body>
+</html>

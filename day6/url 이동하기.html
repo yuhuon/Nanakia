@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>url 이동하기</title>
+<script>
+	function goUrl(){
+	//alert(document.getElementById("server").value);
+		//선택한 select박스의 값에 따라  url이동!!!
+		location.href=document.getElementById("server").value;//프로그램을 이용한 url이동!!
+
+	}
+</script>
+</head>
+<body>
+
+	<a href="http://daum.net">다음</a>
+
+	<select id="server">
+		<option value="http://naver.com">네이버</option>
+		<option value="http://daum.net">다음</option>
+		<option value="http://google.com">구글</option>
+	</select>
+	<input type="button" value="이동" onClick="goUrl()">
+</body>
+</html>

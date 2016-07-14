@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>화면에 도장 찍기</title>
+
+<style>
+body{
+	margin:0px;
+}
+div{
+	background:yellow;
+	height:900px; 
+
+}	
+</style>
+
+<script>
+//문서가 로드되면 초기화할 작업이 있을때 여기서 하자!!
+var wrapper;
+var w=100;// 도장의 가로폭!! 너비!!
+var h=100;// 도장의 높이!!
+function init(){
+	wrapper=document.getElementById("wrapper");
+}
+//마우스를 클릭하면, 동적(실행시=runtime)으로 원하는 tag 을 올려놓자!!
+function stamp(){
+	//div안에다가 이미지를 출력하자!!
+	//결론: 문자열로 도장찍기는 무리가 있다!!
+	//왜?? 위치 문제도 그렇고 누적 부분도 그렇고....
+	//해결책?? 진짜 태그를 생성하겠다!! 실행 타이밍에!!!!(중요!!)
+	//wrapper.innerHTML="<img src=\"../images/stamp.png\">"; 문자열
+	
+	//문서내에 태그를 생성하여 부착하자!!!
+	var img=document.createElement("img");//img tag 를 생성
+	img.src="../images/stamp.png";//생성될 이미지의 경로 등록
+	img.style.width=w+"px";
+	img.style.height=h+"px";
+	img.style.position="absolute";//절대 위치 지정
+	img.style.left=(event.clientX-w/2)+"px";//마우스의 클릭시 x 좌표
+	img.style.top=(event.clientY-h/2)+"px";//마우스 클릭시 y좌표
+	//div에 부착한다!!! -생성된 img를 자식 요소로 등록
+	wrapper.appendChild(img);
+}
+</script>
+</head>
+
+<body onLoad="init()" onMouseDown="stamp()">
+<div id="wrapper"></div>
+</body>
+</html>

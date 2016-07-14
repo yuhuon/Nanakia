@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>버튼수 입력하기 실습</title>
+<style>
+input{
+	width:30px;
+	height:45px;
+	background:yellow;
+	color:red;
+}
+</style>
+<script>
+
+var a=prompt("원하는 버튼 수를 입력해 주세요.");
+
+for (i=1;i<=a;i++){
+	if(i%5==0){
+		document.write("<input type=\"botton\" value=\""+i+"\"><br>");	
+	}else{
+		document.write("<input type=\"botton\" value=\""+i+"\">");
+	}
+}
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+	var x=1;
+//개발자가 원할때 ,호출하면 작동되는 코드영역을 함수라 부른다!!
+//함수는 불러야 일한다!!
+
+//이전 사진 보여주기
+function prev(){
+	x=x-1;
+	document.getElementById("photo").src="../images/"+x+".jpg";
+}
+
+function next(){
+	x=x+1;
+
+	//구글의 개발자 도구 내의 콘솔 영역에 문자열을 출력!!
+	//개발시 디버깅 목적으로 사용
+	// " " 안은 문자로 취급한다.
+	console.log("../images/"+x+".jpg"); 
+
+	//문서내의 이미지의 src경로를 바꾸자!!
+	//단어와 단어가 만나면 뒷 단어의 첫 철자를 대문자로 표기하는
+	//기법이 개발자들 사이에 암묵적 약속이 되버림..
+	//이런 표기법을 camel 기법이라 한다!! 낙타등 기법!!
+	document.getElementById("photo").src="../images/"+x+".jpg";
+}
+</script>
+</head>
+<body>
+<img src="../images/1.jpg" width="450" id="photo">
+<input type="button" value="이전 사진" onclick="prev()">
+<input type="button" value="다음 사진" onclick="next()">
+
+</body>
+</html>

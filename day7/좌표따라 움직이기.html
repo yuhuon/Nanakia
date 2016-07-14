@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>좌표따라 움직이기</title>
+<style>
+/*
+html 태그중에 같은 라인에는 절대로 다른 태그가 존재할 수 없도록
+배척하는 특징을 갖는 태그가 여러개 있다....이러한 특징을
+block이라 한다!!!!!*/
+#wrapper{
+	width:1010px;
+	height:700px;
+	margin:auto;
+}
+#stage{
+	width:800px;
+	height:700px;
+	background:yellow;
+	border:1px solid red;
+	float:left;/*div를 띄운다!!*/
+}
+#info{
+	width:200px;
+	height:700px;
+	background:blue;
+	float:left;
+}
+#pos{
+	width:100%;
+	height:680px;
+	background:pink;
+	overflow:scroll;
+}
+</style>
+
+<script>
+var stage;
+var pos;
+var data = new Array();//좌표 정보를 담는 일차원 배열을 담을 큰 배열!!
+var count=0;//2차원 배열 중 어느 칸에 넣어야 할지를 결정하는 변수
+var img;// 움직일 케릭터 이미지!!
+var step=0; //큰 배열을 순차적으로 접근하기 위한 변수!!
+var st; //setTimeout을 가리키기 위한 변수
+//프로그램 실행시 초기화를 담당할 함수!!
+function init(){
+	stage=document.getElementById("stage");
+	pos=document.getElementById("pos");
+	
+	//문서내의 마리오 이미지를 존재 시키자!!!
+	img=document.createElement("img");
+	img.src="../images/mario.png";
+	img.style.width=30+"px";
+	img.style.position="absolute";
+	stage.appendChild(img);
+}
+function stamp(){	
+	var span=document.createElement("span");
+	span.innerText="●";
+	span.style.position="absolute";
+	span.style.left=event.clientX+"px";
+	span.style.top=event.clientY+"px";
+	span.style.fontSize=1+"px";
+	stage.appendChild(span);//div안에 자식태그요소 추가하기!!
+	
+	//마우스의 좌표를 일차원 배열에 담아두자!!
+	var point=[event.clientX,event.clientY]
+	data[count]=point;	
+	console.log("현재까지 담겨진 좌표의 개수는"+data.length);
+	//우측의 정보div에 현재 좌표를 누적시켜보자.!!
+	pos.innerHTML=pos.innerHTML+"[X좌표:"+data[count][0]+"Y좌표:"+data[count][1]+"]<br>";
+	count++;
+}
+/*
+이차원 배열에 등록된 자표들을 하나씩 참조 하면서, 마리오의 좌표와
+일치시켜 보자!!!!*/
+function start(){
+	if(step<data.length){
+	img.style.left=data[step][0]+"px";
+	img.style.top=data[step][1]+"px";
+	step++;
+	}
+	st=setTimeout("start()",70);
+}
+//작업했던 모든 것을 돌려 놓음!! 초기화!!
+function erase(){
+	clearTimeout(st);
+	//stage에 있는 모든 점들을 제거!!
+	pos.innerText="";
+	stage.innerText="";
+}
+</script>
+
+</head>
+
+<body onLoad="init()">
+	<div id="wrapper">
+		<div id="stage" onMouseDown="stamp()"></div>
+		<div id="info">
+			<input type="button" value="Start" onClick="start()">
+			<input type="button" value="Clear" onClick="erase()">
+			<div id="pos"></div>
+		</div>
+	</div>
+</body>
+</html>

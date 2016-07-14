@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>배열이용 겔러리</title>
+
+<style>
+#main_s{
+	left:300px;
+	height:300px;
+	margin:auto;
+	border:3px solid red;
+}
+#bt_left{
+	transform: rotate(180deg);
+}
+
+</style>
+<script>
+var count=0;
+//배열 선언!!
+var photo= new Array();
+photo[0]="cat1.jpg";
+photo[1]="cat2.jpg";
+photo[2]="cat3.jpg";
+photo[3]="cat4.jpg";
+photo[4]="cat5.jpg";
+photo[5]="cat6.jpg";
+photo[6]="cat7.jpg";
+photo[7]="cat8.jpg";
+photo[8]="cat9.jpg";
+photo[9]="cat10.jpg";
+
+function b_l(){
+	count--
+	var main_s=document.getElementById("main_s").src="../images/1/"+photo[count];
+	if(count<=0){
+		alert("이미지가 없습니다.");
+		document.getElementById("main_s").src="../images/1/"+photo[0];
+		}
+		
+}
+function b_r(){
+	count++
+	document.getElementById("main_s").src="../images/1/"+photo[count];
+	if(count>=10){
+		alert("이미지가 없습니다.")
+		document.getElementById("main_s").src="../images/1/"+photo[9];
+	}
+}
+
+</script>
+</head>
+<body>
+<div>
+	<img src="../images/1/cat1.jpg" id="main_s">
+</div>
+	<img src="../images/1/bt.png" id="bt_left" onClick="b_l()">
+	<img src="../images/1/bt.png" id="bt_right" onClick="b_r()">
+</body>
+</html>

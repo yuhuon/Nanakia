@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>이미지 들고 다니기</title>
+<script>
+//문서가 실행되면 아래의 텍스트박스에 내 이름 넣기!!
+function init(){
+	document.getElementById("txt").value="사과";
+	window.open("http://www.daum.net","pop","width=500,height=400");
+}
+</script>
+</head>
+<body onLoad="init()">
+<input type="text" id="txt" onChange="alert('변경햇어?')">
+
+<select onChange="alert('바꿨어?');">
+	<option>네이버</option>
+	<option>구글</option>
+	<option>다음</option>
+</select>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2차원 배열</title>
+<script>
+var fruit =["사과","딸기","바나나","오렌지"];
+var movie=["워크래프트","정글북","시빌워","곡성"];
+var car=["페라리","BMW","아우디","벤츠"];
+var box=new Array();
+box[0]=fruit;
+box[1]=movie;
+box[2]=car;
+//box는 이차원 배열화 되었음!!
+
+for(var a=0;a<box.length;a++){
+	for(var i=0;i<box[a].length;i++){
+	document.write(box[a][i]+"<br>");
+	}
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

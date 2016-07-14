@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>메모리 데이터 베이스</title>
+<style>
+#wapper{
+	width:650px;
+	height:600px;
+	margin:auto;	
+}
+#nameScreen{
+	width:150px;
+	height:600px;
+	background:yellow;
+	float:left;
+	
+}
+#mainScreen{
+	width:500px;
+	height:600px;
+	background:pink;
+	float:left;
+}
+</style>
+
+<script>
+var bt;
+var m_id;
+var pw;
+// 여러명의 회원을 담을 배열!!
+var memberList=new Array();//크기가 정해져 있으면 안된다.!!
+var count=0;
+var table;
+
+//문서가 로드되면...
+window.addEventListener("load",function(){	
+	getTitle();
+	init();
+});
+
+function init(){
+	bt=document.getElementById("bt");
+	m_id=document.getElementById("m_id");
+	pw=document.getElementById("pw");
+
+	bt.addEventListener("click",function(){	
+		//아이디를 입력하지 않으면....체크;
+		if(m_id.value==""){
+			alert("ID를 입력 하세요!!");
+			m_id.focus();//커서 올려 놓기!
+			return;
+
+		}else if(!pw.value){
+		//패스워드를 입력하지 않으면 ...체크;		
+			alert("PW를 입력 하세요!!");
+			pw.focus();
+			return;
+		}
+
+		//지금 등록 하려는 사람의 id와 pw를 일차원 배열에 보관해 놓자!!
+		
+		var member =[m_id.value , pw.value];
+		// 큰 배열에 담기
+		/*개발자가 직접 카운트를 세서 넣는 방법
+		memberList[count] = member;
+		count++;
+		*/
+		memberList.push(member);//기존 배열에 요소를 추가함
+		//제대로 넣은 경우 등록 절차 수행!!
+		alert(memberList.length+"번째 가입자 이십니다.");
+		getList();
+	})
+}
+
+//제목을 처리하는 함수 정의!!
+function getTitle(){
+	table=document.createElement("table");
+	table.style.width=450+"px";
+	table.style.border=1+"px";
+
+	//tr을 생성 및 추가하자!!(2차원 배열의 크기만큼!!)
+	
+	var tr=document.createElement("tr");
+	
+	var no_td=document.createElement("td"); //no용 td
+	no_td.innerText="번호";
+
+	var id_td=document.createElement("td"); //ID용 td
+	id_td.innerText="ID";
+
+	var pw_td=document.createElement("td"); //pw용 td
+	pw_td.innerText="PW";
+	
+	//생성된 컬럼 td들을 tr에 추가 한다!!
+	tr.appendChild(no_td);
+	tr.appendChild(id_td);
+	tr.appendChild(pw_td);
+	
+	//생성된 tr을 테이블에 추가
+	table.appendChild(tr);
+
+	//div에 테이블 최종 출력
+	mainScreen.appendChild(table);
+}
+
+//appendChile의 특징상 테이블에 기존 값이 누적되므로 리스트를 보여주기 전에
+// 테이블의 자식 요소를 싹 지우자!!
+function initTable(){
+	table.innerHTML="";
+	getTitle();
+}
+
+//등록된 회원 명단을 테이블로 출력하기!!
+function getList(){
+	initTable();
+	var len=memberList.length;
+	var num=len;
+	//회원 수 만큼 돌아야 함
+	for(var i=len-1;i>=0;i--){
+	//이 후 tr 부터는 실제 등록된 데이터가 출력 되어야 한다!!!!
+		var record_tr=document.createElement("tr");
+		var td0=document.createElement("td");
+		var td1=document.createElement("td");
+		var td2=document.createElement("td");
+		
+		td0.innerText=num--;
+		td1.innerText=memberList[i][0] ; //첫번째 레코드에 들어있는 id정보 넣기!
+		td2.innerText=memberList[i][1] ; //첫번째 레코드에 들어있는 pw정보 넣기!
+
+		//생성된 td들을 tr에 추가 하자!
+		record_tr.appendChild(td0);
+		record_tr.appendChild(td1);
+		record_tr.appendChild(td2);
+		table.appendChild(record_tr);
+	}
+}
+</script>
+</head>
+
+<body>
+<div id="wapper">
+	<div id="nameScreen">
+		ID: <input type="text" size="7" maxlength="12" id="m_id"><br>
+		Pw: <input type="password" size="7" maxlength="8" id="pw"><br>
+		<input type="button" value="등록" id="bt">
+	</div>
+	<div id="mainScreen"></div>
+<div>
+</body>
+</html>

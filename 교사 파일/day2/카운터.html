@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" value="0" id="txt">
+	<input type="button" value="카운터 증가" onClick="add()">
+
+</body>
+</html>
+<script>
+var x=1; //전역변수 - 프로세스 즉 현재 실행중인 프로그램이 닫히면
+				//그때서야 메모리에서 소멸됨..
+
+//버튼을 누르면, 수행할 코드 영역 
+function add(){ //내가 원할때 호출될 수 있는 코드 영역을 함수라 한다
+	//버튼을 누르면, 카운터값을 1씩 증가시켜, 텍스트입력 상자에 뿌리자!!
+	//var x=1; //브레이스(중괄호) 영역내에서만 생명력을 갖는 변수를
+					//지역변수라 하며, 닫는 괄호를 만나면 변수는 메모리에서
+					//사라진다!! 
+	
+	document.getElementById("txt").value=x;
+	x++;
+}
+
+
+</script>

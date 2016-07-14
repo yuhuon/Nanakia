@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>우편번호 검색</title>
+<script>
+//새창에서 선택한 현재의 우편번호 텍스트를 ,부모 윈도우의
+//우편번호 입력란에 채워 넣는다!!+주소도 채워 넣기!!
+function setPost(zip,addr){
+	//zip으로 넘어온 데이터가 아직 분리되어 있지 않으므로,분리시켜서
+	//opener윈도우에 알맞게 넣어주자!!
+	var Arr=zip.split("-")
+	opener.document.form1.zipcode1.value=Arr[0];
+	opener.document.form1.zipcode2.value=Arr[1];
+	opener.document.form1.addr1.value=addr;
+	window.close();//현재 창 닫기
+	opener.document.form1.addr2.focus();
+
+}
+</script>
+</head>
+<body>
+<table width="100%" border= "1px">
+	<tr>
+		<td colspan="2" align="center">
+			<input type="text">
+			<img src="/images/serch_button.png" width="30px" height="20px">
+		</td>		
+	</tr>
+	<tr>
+		<td>우편번호</td>
+		<td>주소</td>
+	</tr>
+	<tr onMouseOver="this.style.background='#99cc00'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-456','서울 강남구 신사동 도화빌딩')">123-456</a></td>
+		<td>서울 강남구 신사동 도화빌딩</td>
+	</tr>
+	<tr onMouseOver="this.style.background='#99cc00'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-457','서울 강남구 신사동 도화빌딩2')">123-457</a></td>
+		<td>서울 강남구 신사동 도화빌딩2</td>
+	</tr>
+	<tr onMouseOver="this.style.background='#99cc00'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-458','서울 강남구 잠실동 도화빌딩')">123-458</a></td>
+		<td>서울 강남구 잠실동 도화빌딩</td>
+	</tr>
+	<tr onMouseOver="this.style.background='#99cc00'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-459','서울 강남구 잠실동 NH아파트')">123-459</a></td>
+		<td>서울 강남구 잠실동 NH아파트</td>
+	</tr>
+	<tr onMouseOver="this.style.background='#99cc00'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-460','서울 강남구 잠실1동 레미안 아파트')">123-460</a></td>
+		<td>서울 강남구 잠실1동 레미안 아파트</td>
+	</tr>
+	<tr onMouseOver="this.style.background='#99cc00'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-461','서울 강남구 잠실1동 레미안 아파트 1동')">123-461</a></td>
+		<td>서울 강남구 잠실1동 레미안 아파트 1동</td>
+	</tr>
+
+</table>
+</body>
+</html>

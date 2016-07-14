@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>자동 겔러리</title>
+<style>
+	#wrapper{
+		width:600px;
+		/*background:yellow;*/
+		height:650px;
+		margin:auto;
+	}
+	#controller{
+		width:100%;
+		height:50px;
+		background:#6600ff;
+		/*div 안쪽에 내용물에 대한 중앙정렬!!*/
+		text-align:center;
+	}
+	/*한칸 띄우면, 안쪽의 하위 요소를 의미한다.*/
+	#controller img{
+		width:70px;
+	}
+	#bt_prev{
+		transform: rotate(180deg);
+	}
+</style>
+	
+<script>
+var n=1;
+//문서내의 큰 이미지의 src를 변경하자!!!
+function next(){
+	n++;
+	console.log("현재 n은"+n);
+	n=(n==11)?1:n;
+	document.getElementById("big").src="../images/1/"+n+".jpg"
+	
+}
+
+//자동이란 단지 우리가 정의 해 놓은 함수를 시스템이 대신 호출해주는 것 뿐이다.!!
+function auto(){
+	//자동 호출 부탁!!
+	setInterval("next()",1000);
+}
+</script>
+</head>
+<body>
+	<div id="wrapper">
+		<img src="../images/1/1.jpg" width=100% id="big">		
+		<div id="controller">
+			<img src="../images/1/bt.png" id="bt_prev" onClick="prev()">
+			<img src="../images/1/auto.png" id="bt_auto" onClick="auto()">
+			<img src="../images/1/bt.png" id="bt_next" onClick="next()">
+			</div>
+	</div>
+</body>
+</html>

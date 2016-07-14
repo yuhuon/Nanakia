@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>단어게임</title>
+<style>
+#wrapper{
+	width:400px;
+	height:500px;
+	border:2px solid red;
+	margin:auto;
+}
+#wordView{
+	width:100%;
+	height:120px;
+	background:#cc99ff;
+	font-size:50pt;
+	text-align:center;
+}
+#word_input{
+	width:99%;
+	height:90px;
+	background:yellow;
+	font-size:40pt;
+
+}
+#feedback{
+	width:100%;
+	height:200px;
+	font-size:120pt;
+	text-align:center;
+	color:red;
+	font-weight:bold;
+}
+#score{
+	width:100%;
+	height:70px;
+	font-size:50pt;
+	text-align:center;
+}
+</style>
+<script>
+var count=0;//배열의 몇번째를 보여줄지를 결정하는 전역변수!!
+var jumsu=0;//누적될 점수!!
+var word= new Array();//크기를 정하지 않은 배열 공간 선언
+word[0]="광화문";
+word[1]="마우스";
+word[2]="택시";
+word[3]="몽땅연필";
+word[4]="무지개";
+word[5]="어벤져스";
+word[6]="스마트폰";
+word[7]="컴퓨터";
+word[8]="무궁화";
+word[9]="제주도";
+
+//게임 가동과 동시에 초기에 하고 싶은 작업..
+function init(){
+	//게임에 사용할 단어를 메모리에 미리 확보해 놓자!!!!!
+	var wordView=document.getElementById("wordView");
+	wordView.innerText=word[count];
+	//커서를 올려 놓자!!!!
+	var word_input=document.getElementById("word_input");
+	word_input.focus();//커서 올려 놓는 기능의 함수 호출~!!!!!
+}
+//키보드를 눌렀다 뗄때, 아래의 함수를 호출함!!
+function enter(){
+	var key=event.keyCode;//사용자가 입력한 키도드의 아스키값 반환
+	//alert("당신이 입력한 키보드의 아스키코드값은"+key);
+	if(key==13){
+		//alert("엔터 눌렀어?");
+
+		//사용자가 입력한 데이터와 현재 보고 있는 배열과 값을 비교하여 
+		//알맞는 피드백을 처리하자!!!
+		var word_input=document.getElementById("word_input");
+		if(word_input.value==word[count]){
+			//alert("일치합니다");
+			document.getElementById("feedback").innerText="O";
+			//점수 증가 및 출력!!
+			jumsu+=10
+			document.getElementById("score").innerText=jumsu;
+		}else{
+			//alert("틀립니다");
+			document.getElementById("feedback").innerText="X";
+		}
+		//입력한 데이터 다시 초기화
+		word_input.value="";
+		count++;
+		document.getElementById("wordView").innerText=word[count];
+		}
+}
+</script>
+</head>
+<body onLoad="init()">
+	<div id="wrapper">
+		<div id="wordView"></div>
+		<input type ="text" id="word_input" onKeyUp="enter()">
+		<div id="feedback"></div>
+		<div id="score">0 점</div>
+	</div>
+</body>
+</html>

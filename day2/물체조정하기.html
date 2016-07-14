@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+/*이 영역은 html이 아닌, Cascading Style sheet라는 CSS 라 불리는
+디자인 영역이다!! 이 기술을 이용하면, html의 문서로서의 한계를 극복
+할 수 있다...
+예) 제한 없는 글씨 크기, 제한없는 컨텐츠의 위치, 색상....등등...디자인과
+관련된 거의 모든 것!!!
+*/
+#pic{
+	position:absolute; /*절대 위치로 지정..*/ 
+	left:500px; /*x축*/
+	top:500px; /*y축*/
+	transform: rotate(30deg);
+	transform: scale(1, 1);
+}
+</style>
+
+<script>
+var x=0;
+var y=0;
+var d=0; //각도 정보를 담을 변수
+var sw=1;// 폭
+var sh=1;//높이
+
+//버튼을 누르면 물체를 우측(left값 증가)으로 움직이자!!
+function moveRight(){
+	x=x+10
+	 //문서내에 pic이라 불리는 이미지의 스타일 속성중 left값 변경이 목표임!!
+	 document.getElementById("pic").style.left=x+"px";
+}
+
+//좌측으로 이동!!
+function moveLeft(){
+	 x=x-10
+	 document.getElementById("pic").style.left=x+"px";
+}
+
+//위쪽이동
+function moveUp(){
+	y=y-10
+	document.getElementById("pic").style.top=y+"px";
+}
+
+function moveDown(){
+	y=y+10
+	document.getElementById("pic").style.top=y+"px";
+}
+
+//스타일 시트를 제어하여 물체를 돌려보자
+function spin(){
+	d=d+10;
+	document.getElementById("pic").style.transform="rotate("+d+"deg)";
+}
+
+//스타일 시트를 제어하여 물체의 스케일을 제어하자
+
+function setScale(){
+	sw=sw+1
+	sh=sh+1
+	document.getElementById("pic").style.transform="scale("+sw+","+sh+")";
+}
+//onMouseOver는 마우스가 상부에 존재할때 움직임 계속적인 움직임을 위해선 마우스를 왔다갔다 해줌
+</script>
+
+
+
+</head>
+<body>
+<img src="../images/zoro.jpg" width=200 id="pic">
+<input type="button" value="◀" onclick="moveLeft()">
+<input type="button" value="우측이동" onMouseOver="moveRight()">  <br>
+<input type="button" value="위쪽" onclick="moveUp()">
+<input type="button" value="아래쪽" onmouseOver="moveDown()">
+<input type="button" value="풍차돌리기" onclick="spin()">
+<input type="button" value="스케일링" onclick="setScale()">
+</body>
+</html>
