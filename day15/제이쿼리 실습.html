@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>제이쿼리 실습</title>
+<style>
+/*스타일 시트의 문법 구조는 결국
+	1.(누구) -#id ,태그명 : 선택자!!(selector)
+	2.(어떻게 처리 할지)
+*/
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+/*
+	Jquery 도 결국 누구를 어떻게 처리할지에 관한 문법구조를 갖는다!!
+	다행스러운 것은.Jquery의 선택자는 기존에 우리가 알고 있는 CSS의 
+	선택자를 그대로 따른다!!
+*/
+
+function hide(){
+	document.getElementById("bt");
+	bt.style.display="none";
+}
+//window.addEventListener("load",function(){})
+$(document).ready(function(){
+//문서가 로드 되면!!!
+	for(var i=0;i<3;i++){
+		$("button").hide(1000);
+		$("#bt2").show(1000);
+	}
+});
+
+</script>
+
+</head>
+<body>
+	<input type="button" id="bt" value="나 곧 사라질 거임" onClick="hide()">
+	<button id="bt2">나 버튼</button>
+</body>
+</html>
