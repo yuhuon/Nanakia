@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>두더지 게임</title>
+<style>
+#m_screen{
+	width:800px;
+	height:500px;
+	border:1px solid red;
+	margin:auto;
+	background:url("images/du/배경1.png");
+}
+
+#player1_score{
+    width:400px;
+	height:50px;
+	float:left;
+	
+	
+}
+#player2_score{
+    width:400px;
+	height:50px;
+	float:right;
+	text-align:right;
+	
+	
+}
+
+#s_key{
+	width:100px;
+	height:100px;
+	float:left;
+	position:absolute;
+	top:400px;
+	left:300px;
+	
+}
+#down_key{
+	width:100px;
+	height:100px;
+	float:left;
+	position:absolute;
+	top:400px;
+	left:850px;
+}
+#du{
+	width:200px;
+	height:200px;
+	float:left;
+	position:absolute;
+	top:150px;
+	left:550px;
+
+}
+
+</style>
+<script>
+var du2;
+var x_du;
+var score_bord;
+var p1_score=0;
+var score_bord1;
+var p2_score=0;
+var du_arr=["images/du/du2.png",
+				"images/du/du3.png",
+				"images/du/du4.png"
+];
+var du_arr1 = new Array();
+var key
+var du_visibility=true;
+var m_screen;
+
+window.addEventListener("load",function(){
+	m_screen = document.getElementById("m_screen");
+	init();
+});
+
+window.addEventListener("keydown",function(){
+	key=event.keyCode;
+	//s키 83
+	//down 키 40
+	switch (key){
+		case 83:hit();break;
+		case 40:hit();break;	
+	}
+	
+});
+
+
+function start(){
+	
+	//초기 두더지 숨기기!
+	var du=document.getElementById("du");
+	du.style.visibility="hidden";
+
+	du_play();
+}
+
+
+function init(){
+	score_bord=document.getElementById("1p_score");
+	score_bord1=document.getElementById("2p_score");
+		
+	//점수 초기화
+	score_bord.value=0;
+	score_bord1.value=0;
+
+	for(var i=0;i<=2;i++){
+		var du_img=document.createElement("img");
+		du_img.src=du_arr[i];
+		du_img.style.width=200+"px";
+		du_img.style.height=200+"px";
+		du_img.style.float="left";
+		du_img.style.position="absolute";
+		du_img.style.top=150+"px";
+		du_img.style.left=550+"px";
+		du_img.style.visibility="hidden";
+
+		m_screen.appendChild(du_img);
+
+		du_arr1.push(du_img);	
+		
+	}
+	
+
+
+	//console.log(du_arr[1]);
+}
+
+
+function du_play(){
+	var r=parseInt(Math.random()*2);
+ 
+	
+	if(du_visibility == true){
+		du_arr1[r].style.visibility="visible";
+		//m_screen.appendChild(du_arr1[r]);
+		du_visibility=false;
+		
+	}else if (du_visibility==false){
+		du_arr1[r].style.visibility="hidden";
+		//m_screen.removedChild(du_arr1[r]);
+		du_visibility=true;
+	
+	}
+	
+}
+
+function hit(){
+	//alert(event.keyCode);
+	//s키 83
+	//down 키 40
+	if(du_arr[1]){
+		if(key==83){//누가 먼저 때렸나?
+		
+			p1_score=p1_score+10;
+			score_bord.value=score_bord.value+p1_score;
+		}else if (key==40){
+				p2_score=p2_score+10;
+			score_bord1.value=score_bord1.value+p2_score;
+		
+		}
+			
+	}
+	if(du_arr[2]){
+		if(key==83){//누가 먼저 때렸나?
+			
+			p1_score+=-30;
+			score_bord.value+=p1_score;
+		}else if (key==40){
+			p2_score+=-30;
+			score_bord1.value+=p2_score;
+		
+		}
+	}
+};
+
+</script>
+</head>
+<body>
+<div id="m_screen">
+	<div id="player1_score">		
+		player 1 :<input type="number"  id="1p_score" value="0" >점 
+	</div>
+
+	<div id="player2_score">		
+		player 2 :<input type="number"  id="2p_score" value="0" >점
+	</div>
+
+	<img src="images/du/s_key.png" id="s_key">
+	<img src="images/du/down_key.png" id="down_key">
+	<img src="images/du/du1.png" id="du">
+	
+</div>
+<input type="button" onClick="start()" value="Game start">
+</body>
+</html>
