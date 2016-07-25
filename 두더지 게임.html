@@ -64,6 +64,7 @@ var p1_score=0;
 var score_bord1;
 var p2_score=0;
 var du_arr=["images/du/du2.png",
+				
 				"images/du/du3.png",
 				"images/du/du4.png"
 ];
@@ -71,6 +72,10 @@ var du_arr1 = new Array();
 var key
 var du_visibility=true;
 var m_screen;
+var score_print1
+var score_print2
+var count=1;
+
 
 window.addEventListener("load",function(){
 	m_screen = document.getElementById("m_screen");
@@ -100,8 +105,8 @@ function start(){
 
 
 function init(){
-	score_bord=document.getElementById("1p_score");
-	score_bord1=document.getElementById("2p_score");
+	score_bord=document.getElementById("p1_score");
+	score_bord1=document.getElementById("p2_score");
 		
 	//점수 초기화
 	score_bord.value=0;
@@ -117,7 +122,7 @@ function init(){
 		du_img.style.top=150+"px";
 		du_img.style.left=550+"px";
 		du_img.style.visibility="hidden";
-
+		
 		m_screen.appendChild(du_img);
 
 		du_arr1.push(du_img);	
@@ -132,49 +137,67 @@ function init(){
 
 function du_play(){
 	var r=parseInt(Math.random()*2);
- 
 	
-	if(du_visibility == true){
+	
+	if(du_visibility == true && du_arr1[r].style.visibility=="hidden"){
 		du_arr1[r].style.visibility="visible";
 		//m_screen.appendChild(du_arr1[r]);
 		du_visibility=false;
+		count=1;
 		
-	}else if (du_visibility==false){
+	}else if (du_visibility == false && du_arr1[r].style.visibility=="visible"){
 		du_arr1[r].style.visibility="hidden";
 		//m_screen.removedChild(du_arr1[r]);
 		du_visibility=true;
-	
+		
 	}
+	setTimeout("du_play()",270);
 	
+ //console.log(r)
 }
 
 function hit(){
-	//alert(event.keyCode);
+	
 	//s키 83
 	//down 키 40
-	if(du_arr[1]){
+	//console.log(event.keyCode)
+	score_print1=parseInt(score_bord.value);
+	score_print2=parseInt(score_bord1.value);
+	
+	if(du_arr1[0].style.visibility=="visible"){
 		if(key==83){//누가 먼저 때렸나?
-		
-			p1_score=p1_score+10;
-			score_bord.value=score_bord.value+p1_score;
-		}else if (key==40){
-				p2_score=p2_score+10;
-			score_bord1.value=score_bord1.value+p2_score;
-		
+			if(count==1){		
+				score_bord.value=score_print1+10;
+				count--
+			}
+				
+		}else	if (key==40){
+			if(count==1){		
+			score_bord1.value=score_print2+10;
+			count--
+			}
 		}
 			
-	}
-	if(du_arr[2]){
+	}else if(du_arr1[1].style.visibility=="visible"){
 		if(key==83){//누가 먼저 때렸나?
 			
-			p1_score+=-30;
-			score_bord.value+=p1_score;
-		}else if (key==40){
-			p2_score+=-30;
-			score_bord1.value+=p2_score;
-		
+			if(count==1){		
+				score_bord.value=score_print1-30;
+				count--
+			}
+
+			
+		}else	if (key==40){
+			if(count==1){		
+				score_bord1.value=score_print2-30;
+				count--
+			}
+			
 		}
 	}
+	
+	console.log(score_bord.value);
+
 };
 
 </script>
@@ -182,11 +205,11 @@ function hit(){
 <body>
 <div id="m_screen">
 	<div id="player1_score">		
-		player 1 :<input type="number"  id="1p_score" value="0" >점 
+		player 1 :<input type="number"  id="p1_score"  >점 
 	</div>
 
 	<div id="player2_score">		
-		player 2 :<input type="number"  id="2p_score" value="0" >점
+		player 2 :<input type="number"  id="p2_score"  >점
 	</div>
 
 	<img src="images/du/s_key.png" id="s_key">
