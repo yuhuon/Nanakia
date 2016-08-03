@@ -64,7 +64,6 @@ var p1_score=0;
 var score_bord1;
 var p2_score=0;
 var du_arr=["images/du/du2.png",
-				
 				"images/du/du3.png",
 				"images/du/du4.png"
 ];
@@ -151,7 +150,7 @@ function du_play(){
 		du_visibility=true;
 		
 	}
-	setTimeout("du_play()",270);
+	setTimeout("du_play()",300);
 	
  //console.log(r)
 }
@@ -182,14 +181,14 @@ function hit(){
 		if(key==83){//누가 먼저 때렸나?
 			
 			if(count==1){		
-				score_bord.value=score_print1-30;
+				score_bord.value=score_print1-10;
 				count--
 			}
 
 			
 		}else	if (key==40){
 			if(count==1){		
-				score_bord1.value=score_print2-30;
+				score_bord1.value=score_print2-10;
 				count--
 			}
 			

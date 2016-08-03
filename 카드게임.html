@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>짝맞추기 게임</title>
+ 
+<style>
+div.backDiv {
+  width:50px;
+  height:50px;
+  background-color: gray;
+  text-align: center;
+  font: normal bolder 20pt Arial;
+}
+</style>
+ 
+<script>
+
+var backcard_arr=[];//card 뒷면 배열
+var card_arr=[];//card 배열
+var small_cardtr=4;
+var small_cardtd=6;
+var mid_cardtr=6;
+var mid_cardtd=8;
+var cardtr;
+var cardtd;
+var block_width=50;
+var block_height=50;
+var img;
+
+
+ window.addEventListener("load",function(){
+	//initPage();
+	img = document.createElement("img");
+	
+ });
+window.addEventListener("click",function(){
+	turn_card();
+	img.onClick=turn_card();
+ });
+
+function initGame(value){
+	if(value== "초급"){
+		cardtr=small_cardtr;
+		cardtd=small_cardtd;
+			
+	}else if(value== "중급" ){
+		cardtr=mid_cardtr;
+		cardtd=mid_cardtd;
+	}
+
+
+	var puzzleDiv=document.getElementById("puzzleDiv");
+	var card_table=document.createElement("table");// card table 생성
+		
+		card_table.cellPadding = 1;
+		card_table.cellSpacing = 1;
+		card_table.width = block_width * cardtd;
+		card_table.height = block_height * cardtr;
+		card_table.style.border="1px solid black";
+		puzzleDiv.appendChild(card_table);
+	
+	for(var i=0; i<cardtr;i++){
+		var card_tr=document.createElement("tr");
+
+		
+		//console.log(i);
+		for (var j=0; j<cardtd;j++ ){
+			var card_td=document.createElement("td"); //card img 생성
+				
+			
+			img.src="c:/html_workspace/card.jpg";
+			img.style.hight=100+"px";
+			img.style.width=100+"px"
+			
+
+			card_arr[j]=img;
+			card_td.appendChild(card_arr[j]);
+			card_tr.appendChild(card_td);
+		}
+		card_table.appendChild(card_tr);
+	}
+	
+}
+
+	
+
+function turn_card(){
+ console.log("1");
+}
+</script>
+</head>
+ 
+<body >
+ 
+<!-- 사이즈 변경 -->
+<input type="button" value="초급" onclick="initGame(value);">
+<input type="button" value="중급" onclick="initGame(value);">
+ 
+<br><br>
+ 
+<!-- 퍼즐 테이블 DIV -->
+<div id="puzzleDiv"></div>
+ 
+<br>
+ 
+<!-- 게임 시작과 끝 블럭 -->
+<input type="button" value="시작" onclick="startGame();">
+<input type="button" value=" 끝 " onclick="endGame();">
+ 
+<br><br>
+ 
+<!-- 경과 시간 표시 -->
+시간: <span id="timeSpan">0</span>초
+ 
+<br><br>
+ 
+<div id="debugDiv"></div>
+ 
+</body>
+</html>
